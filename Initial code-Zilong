@@ -1,0 +1,27 @@
+n <- 1000
+A <- rnorm(n)
+D<-rbinom(n,1,0.6)
+O<--1*D+A+rnorm(n)
+Y<- -1.2*D+0.66*A+rnorm(n)
+dataset <- data.frame(Y=Y, A=A, O=O,D=D)
+
+save(dataset,file="nb.RData")
+model1 <- lm(Y ~ D, data = dataset)
+summary(model1)
+
+model2 <- lm(Y ~ D + O, data = dataset)
+summary(model2)
+
+model3 <- lm(Y ~ D + O +A, data = dataset)
+summary(model3)
+
+model4 <- lm(Y ~ D +A, data = dataset)
+summary(model4)
+
+#Generating random variables A, D, F(if needed) and using them to represent 
+#the collider O and the earning Y. We need to assume the coefficient between Y 
+#and D is a certain number, like -1.2.  
+#Then running different regressions with different controls. 
+#Ideally, the regression result with better control should be closer to 
+#the -1.2 we have made. The results with bad control (i.e. fix the collider) 
+#will be the opposite.
