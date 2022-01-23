@@ -1,0 +1,20 @@
+n <- 1000 
+A <- rnorm(n)
+D<-rbinom(n,1,0.6)
+F<-D  # since that only women are discriminated against by definition.
+O<-ifelse(A>median(A)&F<0.5,1,0) #O is 1 when A is bigger than a certain level (eg:the median) and when F is 0
+Y<- -1*D+0.66*A+O+rnorm(n)
+dataset <- data.frame(Y=Y, A=A, O=O,D=D)
+
+save(dataset,file="nb2.RData")
+model1 <- lm(Y ~ D, data = dataset)
+summary(model1)
+
+model2 <- lm(Y ~ D + O, data = dataset)
+summary(model2)
+
+model3 <- lm(Y ~ D + O +A, data = dataset)
+summary(model3)
+
+model4 <- lm(Y ~ D +A, data = dataset)
+summary(model4)
