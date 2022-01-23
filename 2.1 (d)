@@ -1,0 +1,21 @@
+n <- 1000
+
+A <- rnorm(n)
+D <- rbinom(n,1,0.6)
+M <- ifelse(A > 0.7,1,0)
+O <- ifelse(M >0.5&D >0.5,1,0)
+Y <- D+0.66*A+O+rnorm(n)
+dataset <- data.frame(Y=Y, A=A, O=O,D=D, M=M)
+
+save(dataset,file="nb.RData")
+model1 <- lm(Y ~ D, data = dataset)
+summary(model1)
+
+model2 <- lm(Y ~ D + O, data = dataset)
+summary(model2)
+
+model3 <- lm(Y ~ D + O +A, data = dataset)
+summary(model3)
+
+model4 <- lm(Y ~ D +A, data = dataset)
+summary(model4)
