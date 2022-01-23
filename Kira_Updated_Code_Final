@@ -22,15 +22,3 @@ summary(model3)
 model4 <- lm(Y ~ D +A, data = dataset)
 summary(model4)
 
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
