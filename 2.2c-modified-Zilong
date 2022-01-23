@@ -1,0 +1,14 @@
+#I did some modifications and here is the code.
+
+n <- 1000
+M<-rbinom(n,1,0.3)
+T<-ifelse(M<0.5,0,rbinom(n,1,0.4))
+O<--1.5*M-0.6*T+rnorm(n)+0.05
+dataset <- data.frame(M=M, T=T, O=O)
+save(dataset,file="nb4.RData")
+
+model1 <- lm(O ~ M, data = dataset)
+summary(model1)
+
+model2 <- lm(O ~ M+T, data = dataset)
+summary(model2)
